@@ -48,14 +48,20 @@
                 font-size: 84px;
             }
 
+            .links {
+                text-transform: uppercase;
+                font-size: 13px;
+            }
+
+            .links > span {
+                padding: 0 25px;
+                display: inline-block;
+            }
+
             .links > a {
-                color: #636b6f;
+                color: #009fee;
                 padding: 0 25px;
                 font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
             }
 
             .m-b-md {
@@ -65,23 +71,12 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
             <div class="content">
                 <div class="title m-b-md">
-                    ItsJeffro.com
+                    Jeff Nielsen
+                </div>
+                <div class="links">
+                    <span>Web developer</span> | <a href="https://github.com/itsjeffro" title="itsjeffro@github">itsjeffro@Github</a>
                 </div>
             </div>
         </div>
