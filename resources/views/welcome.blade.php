@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Jeff Nielsen | Web developer</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
 
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
+                background-color: #f7f8f9;
+                color: #3e4b51;
+                font-family: 'Open Sans', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
@@ -45,12 +45,16 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 70px;
             }
 
             .links {
-                text-transform: uppercase;
-                font-size: 13px;
+                font-size: 14px;
+                padding: 15px;
+                box-shadow: 0 1px 2px rgba(0,0,0,.24);
+                border-radius: 3px;
+                background: #fff;
+                font-weight: 600;
             }
 
             .links > span {
@@ -76,7 +80,8 @@
                     Jeff Nielsen
                 </div>
                 <div class="links">
-                    <span>Web developer</span> | <a href="https://github.com/itsjeffro" title="itsjeffro@github">itsjeffro@Github</a>
+                    <span>Web developer</span>
+                    |<a href="https://github.com/itsjeffro" title="itsjeffro@github" target="_blank">itsjeffro@Github</a>
                 </div>
             </div>
         </div>
