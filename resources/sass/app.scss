@@ -6,3 +6,20 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Components
+@import './components/navbar';
+
+// Pages
+@import './pages/home';
+
+// Other
+
+html, body {
+  background-color: #f7f8f9;
+  color: #3e4b51;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
+  height: 100vh;
+  margin: 0;
+}
