@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider')->name('login.provider');
+
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('/', 'HomeController@index')->name('home');
