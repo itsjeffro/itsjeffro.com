@@ -1,23 +1,28 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+        <title>Jeff Nielsen | Web developer</title>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
 
-                    {{ __('You are logged in!') }}
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="flex-center position-ref full-height">
+            <div class="content">
+                <div class="title m-b-md">
+                    Jeff Nielsen
+                </div>
+                <div class="links">
+                    <span>Web developer</span>
+                    |<a href="https://github.com/itsjeffro" title="itsjeffro@github" target="_blank">itsjeffro@Github</a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+    </body>
+</html>
