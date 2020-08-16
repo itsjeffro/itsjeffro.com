@@ -42,6 +42,7 @@
 
             .content {
                 text-align: center;
+                padding: 0 15px;
             }
 
             .title {
@@ -50,7 +51,7 @@
 
             .links {
                 font-size: 14px;
-                padding: 15px;
+                padding: 15px 0;
                 box-shadow: 0 1px 2px rgba(0,0,0,.24);
                 border-radius: 3px;
                 background: #fff;
@@ -58,13 +59,13 @@
             }
 
             .links > span {
-                padding: 0 25px;
+                padding: 0 20px;
                 display: inline-block;
             }
 
             .links > a {
                 color: #009fee;
-                padding: 0 25px;
+                padding: 0 20px;
                 font-size: 13px;
             }
 
