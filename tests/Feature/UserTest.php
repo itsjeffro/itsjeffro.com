@@ -23,10 +23,10 @@ class UserTest extends TestCase
         $jsonResponse
             ->assertStatus(201)
             ->assertJson([
-            'data' => [
-                'name' => 'DEMO_NAME',
-            ]
-        ]);
+                'data' => [
+                    'name' => 'DEMO_NAME',
+                ]
+            ]);
     }
 
     public function test_update_user_successfully()
@@ -45,6 +45,24 @@ class UserTest extends TestCase
                 'data' => [
                     'email' => 'updated@demo.com',
                     'name' => 'UPDATED_NAME',
+                ]
+            ]);
+    }
+
+    public function test_get_user_successfully()
+    {
+        $user = factory(User::class)->create([
+            'name' => 'DEMO_NAME',
+        ]);
+
+        $jsonResponse = $this->actingAs($user)
+            ->json('get', "/admin/users/$user->id");
+
+        $jsonResponse
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'name' => 'DEMO_NAME',
                 ]
             ]);
     }
