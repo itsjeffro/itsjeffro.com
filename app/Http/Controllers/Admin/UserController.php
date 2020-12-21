@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Role;
 use App\User;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Http\JsonResponse;
@@ -23,8 +24,15 @@ class UserController
     public function store(Request $request): UserResource
     {
         $user = new User();
-        $user->fill($request->all());
+        $user->email = $request->input('email');
+        $user->name = $request->input('name');
         $user->save();
+
+        if ($request->has('roles')) {
+            $user->assignRole($request->input('roles'));
+        }
+
+        $user->with('roles')->first();
 
         return new UserResource($user);
     }
@@ -33,6 +41,10 @@ class UserController
     {
         $user->fill($request->all());
         $user->save();
+
+        if ($request->has('roles')) {
+            $user->assignRole($request->input('roles'));
+        }
 
         return new UserResource($user);
     }
