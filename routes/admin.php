@@ -19,3 +19,11 @@ Route::prefix('roles')->group(function () {
     Route::put('/{role}', 'Admin\RoleController@update');
     Route::delete('/{role}', 'Admin\RoleController@destroy');
 });
+
+Route::prefix('posts')->group(function () {
+    Route::get('/', 'Admin\PostController@index');
+    Route::get('/{post}', 'Admin\PostController@show');
+    Route::post('/', 'Admin\PostController@store');
+    Route::put('/{post}', 'Admin\PostController@update');
+    Route::delete('/{post}', 'Admin\PostController@destroy');
+});
