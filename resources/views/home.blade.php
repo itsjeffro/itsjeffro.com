@@ -6,23 +6,12 @@
 
         <title>Jeff Nielsen | Web developer</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
-
-        <!-- Styles -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                    Jeff Nielsen
-                </div>
-                <div class="links">
-                    <span>Web developer</span>
-                    |<a href="https://github.com/itsjeffro" title="itsjeffro@github" target="_blank">itsjeffro@Github</a>
-                </div>
-            </div>
-        </div>
+        <div id="app"></div>
+
+        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>
