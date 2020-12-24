@@ -1,7 +1,7 @@
 version: '2'
 services:
   itsjeffrocom_web:
-    image: itsjeff/dev-php:7.4
+    image: itsjeff/dev-php:latest
     container_name: itsjeffrocom_web
     volumes:
       - .:/var/www/html
