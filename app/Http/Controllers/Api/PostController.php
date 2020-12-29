@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
@@ -61,7 +61,7 @@ class PostController extends Controller
     /**
      * Deletes a specified record.
      *
-     * @throws AuthorizationException
+     * @throws AuthorizationException|\Exception
      */
     public function destroy(Post $post): JsonResponse
     {

@@ -16,7 +16,7 @@ class PostTest extends TestCase
         $user = factory(User::class)->create();
 
         $jsonResponse = $this->actingAs($user)
-            ->json('post', '/admin/posts', [
+            ->json('post', '/api/posts', [
                 'title' => 'POST_TITLE',
                 'content' => 'POST_CONTENT',
             ]);
@@ -43,7 +43,7 @@ class PostTest extends TestCase
         ]);
 
         $jsonResponse = $this->actingAs($user)
-            ->json('put', "/admin/posts/$post->id", [
+            ->json('put', "/api/posts/$post->id", [
                 'title' => 'UPDATED_TITLE',
                 'content' => 'UPDATED_TITLE',
             ]);
@@ -67,7 +67,7 @@ class PostTest extends TestCase
         ]);
 
         $jsonResponse = $this->actingAs($user)
-            ->json('delete', "/admin/posts/$post->id");
+            ->json('delete', "/api/posts/$post->id");
 
         $jsonResponse->assertStatus(204);
     }
@@ -81,7 +81,7 @@ class PostTest extends TestCase
         ]);
 
         $jsonResponse = $this->actingAs($user)
-            ->json('get', "/admin/posts/$post->id");
+            ->json('get', "/api/posts/$post->id");
 
         $jsonResponse
             ->assertStatus(200)
@@ -106,7 +106,7 @@ class PostTest extends TestCase
         ]);
 
         $jsonResponse = $this->actingAs($user)
-            ->json('put', "/admin/posts/$post->id");
+            ->json('put', "/api/posts/$post->id");
 
         $jsonResponse->assertStatus(403);
     }

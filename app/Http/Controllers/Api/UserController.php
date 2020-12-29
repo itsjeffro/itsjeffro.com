@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Api;
 
 use App\User;
 use App\Http\Resources\UserResource;
@@ -10,16 +10,25 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class UserController
 {
+    /**
+     * Returns all records.
+     */
     public function index(): AnonymousResourceCollection
     {
         return UserResource::collection(User::paginate(User::DEFAULT_PER_PAGE));
     }
 
+    /**
+     * Returns specified record.
+     */
     public function show(User $user): UserResource
     {
         return new UserResource($user);
     }
 
+    /**
+     * Creates a new record.
+     */
     public function store(Request $request): UserResource
     {
         $user = new User();
@@ -36,6 +45,9 @@ class UserController
         return new UserResource($user);
     }
 
+    /**
+     * Updates a specified record.
+     */
     public function update(Request $request, User $user): UserResource
     {
         $user->fill($request->all());
@@ -48,6 +60,11 @@ class UserController
         return new UserResource($user);
     }
 
+    /**
+     * Deletes a specified record.
+     *
+     * @throws \Exception
+     */
     public function destroy(User $user): JsonResponse
     {
         $user->delete();

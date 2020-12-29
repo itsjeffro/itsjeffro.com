@@ -18,7 +18,7 @@ class UserRoleTest extends TestCase
         $user = factory(User::class)->create();
 
         $jsonResponse = $this->actingAs($user)
-            ->json('post', '/admin/users', [
+            ->json('post', '/api/users', [
                 'email' => 'demo@demo.com',
                 'name' => 'DEMO_NAME',
                 'roles' => [
