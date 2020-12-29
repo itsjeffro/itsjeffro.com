@@ -1,3 +1,3 @@
 import './bootstrap';
 
-import './components/App';
+import './modules/app/Root';

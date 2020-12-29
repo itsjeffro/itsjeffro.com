@@ -1,5 +1,5 @@
 import * as React from 'react';
-import DateTime from "../../../services/DateTime";
+import DateTime from "../../../../../services/DateTime";
 
 const Post = (props) => {
   const { post } = props;

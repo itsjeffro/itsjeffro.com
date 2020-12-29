@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Navbar from "./Navbar/Navbar";
-import PostsApi from "../services/api/PostsApi";
-import Post from "../pages/HomePage/components/Post";
-import UserApi from "../services/api/UserApi";
+import Navbar from "../../components/Navbar/Navbar";
+import PostsApi from "../../services/api/PostsApi";
+import Post from "./pages/HomePage/components/Post";
+import UserApi from "../../services/api/UserApi";
 
-class App extends React.Component<any, any> {
+class Root extends React.Component<any, any> {
   state = {
     isLoading: true,
     user: {},
@@ -70,8 +70,8 @@ class App extends React.Component<any, any> {
   }
 }
 
-export default App;
+export default Root;
 
 if (document.getElementById('app')) {
-  ReactDOM.render(<App />, document.getElementById('app'));
+  ReactDOM.render(<Root />, document.getElementById('app'));
 }
