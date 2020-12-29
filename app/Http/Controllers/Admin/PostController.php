@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class PostController
+class PostController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
@@ -17,6 +18,8 @@ class PostController
 
     public function show(Post $post): PostResource
     {
+        $this->authorize('view', $post);
+
         return new PostResource($post);
     }
 
