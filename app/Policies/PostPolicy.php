@@ -11,17 +11,6 @@ class PostPolicy
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
-    public function viewAny(User $user)
-    {
-        //
-    }
-
-    /**
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
@@ -30,7 +19,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return $post->user_id = $user->id;
+        return (int) $post->user_id === (int) $user->id;
     }
 
     /**
@@ -53,7 +42,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $post->user_id = $user->id;
+        return (int) $post->user_id === (int) $user->id;
     }
 
     /**
@@ -65,7 +54,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $post->user_id = $user->id;
+        return (int) $post->user_id === (int) $user->id;
     }
 
     /**
@@ -77,7 +66,7 @@ class PostPolicy
      */
     public function restore(User $user, Post $post)
     {
-        return $post->user_id = $user->id;
+        return (int) $post->user_id === (int) $user->id;
     }
 
     /**
@@ -89,6 +78,6 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post)
     {
-        return $post->user_id = $user->id;
+        return (int) $post->user_id === (int) $user->id;
     }
 }
