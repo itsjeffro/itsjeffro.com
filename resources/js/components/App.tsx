@@ -35,15 +35,24 @@ class App extends React.Component<any, any> {
           title={ "ItsJeffro.com" }
         />
       
-        <div className="container">
+        <div className="container-fluid">
           <div className="content">
-            { isLoading ? <div className="flex-center">Loading posts ...</div> : ''}
-            
-            { !isLoading && posts.data.length === 0
-              ? <div className="flex-center">No posts at the moment.</div>
-              : '' }
-            
-            { !isLoading ? posts.data.map((post) => <Post key={ post.id } post={ post }/>) : '' }
+            <div className="row">
+              <div className="col-lg-6 offset-lg-3">
+                { isLoading ? <div className="flex-center">Loading posts ...</div> : ''}
+      
+                { !isLoading && posts.data.length === 0
+                  ? <div className="flex-center">No posts at the moment.</div>
+                  : '' }
+      
+                { !isLoading ? posts.data.map((post) => <Post key={ post.id } post={ post }/>) : '' }
+              </div>
+              <div className="col-lg-3">
+                <h5>Tags</h5>
+                
+                No post tags available.
+              </div>
+            </div>
           </div>
         </div>
       </>
