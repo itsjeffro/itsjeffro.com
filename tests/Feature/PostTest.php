@@ -27,7 +27,9 @@ class PostTest extends TestCase
                 'data' => [
                     'title' => 'POST_TITLE',
                     'content' => 'POST_CONTENT',
-                    'user_id' => $user->id,
+                    'author' => [
+                        'id' => $user->id,
+                    ],
                 ]
             ]);
     }
@@ -87,8 +89,25 @@ class PostTest extends TestCase
                 'data' => [
                     'title' => $post->title,
                     'content' => $post->content,
-                    'user_id' => $user->id,
+                    'author' => [
+                        'id' => $user->id,
+                    ],
                 ]
             ]);
+    }
+
+    public function test_user_cannot_update_another_users_post()
+    {
+        $user = factory(User::class)->create();
+        $author = factory(User::class)->create();
+
+        $post = factory(Post::class)->create([
+            'user_id' => $author->id,
+        ]);
+
+        $jsonResponse = $this->actingAs($user)
+            ->json('put', "/admin/posts/$post->id");
+
+        $jsonResponse->assertStatus(403);
     }
 }
