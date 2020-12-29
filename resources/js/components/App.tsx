@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import Navbar from "./Navbar/Navbar";
 import PostsApi from "../services/api/PostsApi";
 import Post from "../pages/HomePage/components/Post";
+import UserApi from "../services/api/UserApi";
 
 class App extends React.Component<any, any> {
   state = {
     isLoading: true,
+    user: {},
     posts: {
       data: [],
     },
@@ -14,13 +16,21 @@ class App extends React.Component<any, any> {
 
   componentDidMount(): void {
     const postsApi = new PostsApi();
+    const userApi = new UserApi();
     
-    const posts = postsApi.getAll()
+    postsApi.getAll()
       .then((response) => {
         this.setState({
           posts: response.data,
           isLoading: false
         });
+      }, (error) => {
+        //
+      });
+  
+    userApi.getUser()
+      .then((response) => {
+        this.setState({ user: response.data });
       }, (error) => {
         //
       });
