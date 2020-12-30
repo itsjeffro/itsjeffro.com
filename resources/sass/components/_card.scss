@@ -1,0 +1,26 @@
+.card .table {
+  margin-bottom: 0;
+
+  th {
+    background: #f7f7f7;
+    border-top: 0;
+
+    &:first-child {
+      padding-left: 1.25rem;
+    }
+
+    &:last-child {
+      padding-left: 1.25rem;
+    }
+  }
+
+  td {
+    &:first-child {
+      padding-left: 1.25rem;
+    }
+
+    &:last-child {
+      padding-left: 1.25rem;
+    }
+  }
+}
