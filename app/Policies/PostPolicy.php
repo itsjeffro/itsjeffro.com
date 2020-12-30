@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Post;
+use App\Models\Role;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -19,6 +20,10 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
         return (int) $post->user_id === (int) $user->id;
     }
 
@@ -42,6 +47,10 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
         return (int) $post->user_id === (int) $user->id;
     }
 
@@ -54,6 +63,10 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
         return (int) $post->user_id === (int) $user->id;
     }
 
@@ -66,6 +79,10 @@ class PostPolicy
      */
     public function restore(User $user, Post $post)
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
         return (int) $post->user_id === (int) $user->id;
     }
 
@@ -78,6 +95,10 @@ class PostPolicy
      */
     public function forceDelete(User $user, Post $post)
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
         return (int) $post->user_id === (int) $user->id;
     }
 }
