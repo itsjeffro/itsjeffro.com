@@ -8,7 +8,9 @@ import UserApi from "../../services/api/UserApi";
 class Root extends React.Component<any, any> {
   state = {
     isLoading: true,
-    user: {},
+    user: {
+      name: ''
+    },
     posts: {
       data: [],
     },
@@ -37,13 +39,13 @@ class Root extends React.Component<any, any> {
   }
   
   render() {
-    const { posts, isLoading } = this.state;
+    const { user, posts, isLoading } = this.state;
     
     return (
       <>
         <Navbar title={ "ItsJeffro.com" }>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="/">Home</a>
               </li>
@@ -51,6 +53,9 @@ class Root extends React.Component<any, any> {
                 <a className="nav-link" href="https://github.com/itsjeffro" target="_blank">Github</a>
               </li>
             </ul>
+            <div>
+              { user.name ? `Welcome, ${ user.name }` : '' }
+            </div>
           </div>
         </Navbar>
       
