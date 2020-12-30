@@ -1,0 +1,36 @@
+#!/bin/bash
+
+export APP_SERVICE=${APP_SERVICE:-"itsjeffrocom_web"}
+
+docker info > /dev/null 2>&1
+
+if [ $? -ne 0 ]; then
+  echo -e "Docker is not running."
+
+  exit 1
+fi
+
+if [ $# -gt 0 ]; then
+
+  if [ "$1" == "artisan" ]; then
+    shift 1
+
+    docker-compose exec "$APP_SERVICE" php artisan "$@"
+
+  elif [ "$1" == "composer" ]; then
+    shift 1
+
+    docker-compose exec "$APP_SERVICE" composer "$@"
+
+  elif [ "$1" == "ssh" ]; then
+    shift 1
+
+    docker-compose exec "$APP_SERVICE" bash
+
+  else
+    docker-compose "$@"
+  fi
+
+else
+  docker-compose ps
+fi
