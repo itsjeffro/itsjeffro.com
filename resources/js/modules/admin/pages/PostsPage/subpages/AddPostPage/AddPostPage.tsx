@@ -8,6 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 class AddPostPage extends React.Component<any, any> {
   state = {
     post: {
+      id: '',
       title: '',
       content: '',
       author: {
@@ -40,12 +41,33 @@ class AddPostPage extends React.Component<any, any> {
     const name = target.name;
     const value = target.value;
     
-    this.setState((prevState) => ({
-      ...prevState.post,
-      post: {
-        [name]: value,
-      }
-    }));
+    const post = {
+      ...this.state.post,
+      [name]: value,
+    };
+    
+    this.setState({ post: post });
+  };
+  
+  onTextChange = (value, delta, source, editor) => {
+    const post = {
+      ...this.state.post,
+      content: value,
+    };
+    
+    this.setState({ post: post });
+  };
+  
+  onSaveClick = (postId: string) => {
+    const { post } = this.state;
+    const postsApi = new PostsApi();
+  
+    postsApi.updateOne(postId, post)
+      .then((response) => {
+        //
+      }, (error) => {
+        //
+      })
   };
   
   render() {
@@ -66,11 +88,22 @@ class AddPostPage extends React.Component<any, any> {
                   <div className="card-body">
                     <div className="form-group">
                       <label htmlFor="title">Title</label>
-                      <input type="text" className="form-control" id="title" value={ post.title } />
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="title"
+                        name="title"
+                        value={ this.state.post.title }
+                        onChange={ (event) => this.onInputChange(event) }
+                      />
                     </div>
                     
-                    <label htmlFor="content">Content</label>
-                    <ReactQuill theme="snow" value={ post.content } onChange={ () => this.onInputChange }/>
+                    <label htmlFor="conttent">Content</label>
+                    <ReactQuill
+                      theme="snow"
+                      value={ post.content }
+                      onChange={ this.onTextChange }
+                    />
                   </div>
                 </div>
               </div>
@@ -78,7 +111,10 @@ class AddPostPage extends React.Component<any, any> {
               <div className="col-lg-3">
                 <ul className="list-group">
                   <li className="list-group-item">
-                    <button className="btn btn-primary btn-block">Save</button>
+                    <button
+                      className="btn btn-primary btn-block"
+                      onClick={ (event) => this.onSaveClick(post.id) }
+                    >Save</button>
                   </li>
                   <li className="list-group-item">
                     Published:
