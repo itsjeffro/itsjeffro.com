@@ -41,9 +41,18 @@ class Root extends React.Component<any, any> {
     
     return (
       <>
-        <Navbar
-          title={ "ItsJeffro.com" }
-        />
+        <Navbar title={ "ItsJeffro.com" }>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="https://github.com/itsjeffro" target="_blank">Github</a>
+              </li>
+            </ul>
+          </div>
+        </Navbar>
       
         <div className="container-fluid">
           <div className="content">
