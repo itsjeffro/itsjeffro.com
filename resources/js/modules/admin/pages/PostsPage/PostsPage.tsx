@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from "react-router-dom";
 import AdminNavbar from "../../components/AdminNavbar/AdminNavbar";
 import DataGrid from "../../../../components/DataGrid/DataGrid";
 import PostsApi from "../../../../services/api/PostsApi";
@@ -52,7 +53,7 @@ class PostsPage extends React.Component<any, any> {
       
       return {
         id: post.id,
-        title: post.title,
+        title: <NavLink to={ `/posts/${ post.id }` }>{ post.title }</NavLink>,
         createdAt: <span title={ post.createdAt }>{ dateTime.format('d F, Y - h:i A') }</span>,
       };
     });
