@@ -5,13 +5,23 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Services\PostService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    /** @var PostService */
+    private $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
+
     /**
      * Returns all records.
      */
@@ -33,11 +43,13 @@ class PostController extends Controller
      */
     public function store(Request $request): PostResource
     {
-        $post = new Post();
-        $post->user_id = $request->user()->id;
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
-        $post->save();
+        $post = $this->postService
+            ->create([
+                'user_id' => $request->user()->id,
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug'),
+                'content' => $request->input('content'),
+            ]);
 
         return new PostResource($post);
     }
@@ -51,9 +63,12 @@ class PostController extends Controller
     {
         $this->authorize('update', $post);
 
-        $post->title = $request->input('title');
-        $post->content = $request->input('content');
-        $post->save();
+        $post = $this->postService
+            ->update($post, [
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug'),
+                'content' => $request->input('content'),
+            ]);
 
         return new PostResource($post);
     }
