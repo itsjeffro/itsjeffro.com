@@ -22,7 +22,7 @@ class PostsPage extends React.Component<any, any> {
     this.getPostsByPage(1);
   }
   
-  getPostsByPage = (page?: number): void => {
+  private getPostsByPage = (page?: number): void => {
     const postsApi = new PostsApi();
     
     postsApi.getAll(page)
@@ -33,10 +33,22 @@ class PostsPage extends React.Component<any, any> {
       });
   };
   
-  onPageClick = (event, page: number): void => {
+  private onPageClick = (event, page: number): void => {
     event.preventDefault();
     
     this.getPostsByPage(page);
+  };
+  
+  private getPostRows = (posts: any): any[] => {
+    return posts.data.map((post) => {
+      const dateTime = new DateTime(post.updatedAt);
+  
+      return {
+        id: post.id,
+        title: <NavLink to={ `/posts/${ post.id }` }>{ post.title }</NavLink>,
+        updatedAt: <span title={ post.updatedAt }>{ dateTime.format('d F, Y - h:i A') }</span>,
+      };
+    })
   };
   
   render() {
@@ -45,18 +57,8 @@ class PostsPage extends React.Component<any, any> {
     let columns = [
       { headerName: "Id", field: "id" },
       { headerName: "Title", field: "title" },
-      { headerName: "Created at", field: "createdAt" },
+      { headerName: "Updated at", field: "updatedAt" },
     ];
-    
-    let rows = posts.data.map((post) => {
-      const dateTime = new DateTime(post.createdAt);
-      
-      return {
-        id: post.id,
-        title: <NavLink to={ `/posts/${ post.id }` }>{ post.title }</NavLink>,
-        createdAt: <span title={ post.createdAt }>{ dateTime.format('d F, Y - h:i A') }</span>,
-      };
-    });
   
     return (
       <>
@@ -77,7 +79,7 @@ class PostsPage extends React.Component<any, any> {
                   <div className="card-header">
                     Posts
                   </div>
-                  <DataGrid columns={ columns } rows={ rows } />
+                  <DataGrid columns={ columns } rows={ this.getPostRows(posts) } />
                 </div>
                 
                 <Pagination
