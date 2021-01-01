@@ -17,16 +17,42 @@ class PostTest extends TestCase
 
         $jsonResponse = $this->actingAs($user)
             ->json('post', '/api/posts', [
-                'title' => 'POST_TITLE',
-                'content' => 'POST_CONTENT',
+                'title' => 'POST TITLE',
+                'content' => 'POST CONTENT',
             ]);
 
         $jsonResponse
             ->assertStatus(201)
             ->assertJson([
                 'data' => [
-                    'title' => 'POST_TITLE',
-                    'content' => 'POST_CONTENT',
+                    'title' => 'POST TITLE',
+                    'slug' => 'post-title',
+                    'content' => 'POST CONTENT',
+                    'author' => [
+                        'id' => $user->id,
+                    ],
+                ]
+            ]);
+    }
+
+    public function test_create_post_with_slug_successfully()
+    {
+        $user = factory(User::class)->create();
+
+        $jsonResponse = $this->actingAs($user)
+            ->json('post', '/api/posts', [
+                'title' => 'POST TITLE',
+                'slug' => 'POST SLUG',
+                'content' => 'POST CONTENT',
+            ]);
+
+        $jsonResponse
+            ->assertStatus(201)
+            ->assertJson([
+                'data' => [
+                    'title' => 'POST TITLE',
+                    'slug' => 'post-slug',
+                    'content' => 'POST CONTENT',
                     'author' => [
                         'id' => $user->id,
                     ],
