@@ -38,8 +38,8 @@ export default class DateTime {
     return this.dateTime.getHours();
   }
   
-  public getMinutes(): number {
-    return this.dateTime.getMinutes();
+  public getMinutes(): string {
+    return ('0' + this.dateTime.getMinutes()).substr(-2);
   }
   
   public getSeconds(): number {
