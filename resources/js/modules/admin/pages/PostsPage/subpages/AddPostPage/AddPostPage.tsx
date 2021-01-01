@@ -10,6 +10,7 @@ class AddPostPage extends React.Component<any, any> {
     post: {
       id: '',
       title: '',
+      slug: '',
       content: '',
       author: {
         name: '',
@@ -94,6 +95,18 @@ class AddPostPage extends React.Component<any, any> {
                         id="title"
                         name="title"
                         value={ this.state.post.title }
+                        onChange={ (event) => this.onInputChange(event) }
+                      />
+                    </div>
+  
+                    <div className="form-group">
+                      <label htmlFor="slug">Slug</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="slug"
+                        name="slug"
+                        value={ this.state.post.slug }
                         onChange={ (event) => this.onInputChange(event) }
                       />
                     </div>
