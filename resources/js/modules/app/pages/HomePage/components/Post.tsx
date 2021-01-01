@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { NavLink } from "react-router-dom";
 import DateTime from "../../../../../services/DateTime";
 
 const Post = (props) => {
@@ -16,7 +17,7 @@ const Post = (props) => {
 
   return (
     <article className="post">
-      <h2>{ post.title }</h2>
+      <h2><NavLink to={ post.slug }>{ post.title }</NavLink></h2>
       <p><span title={ post.createdAt }>{ createdAt }</span></p>
       { post.content }
     </article>
