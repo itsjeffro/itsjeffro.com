@@ -24,3 +24,13 @@
     }
   }
 }
+
+.card-header {
+  input[type="checkbox"] {
+    vertical-align: middle;
+  }
+  .action {
+    vertical-align: middle;
+    margin-left: 1em;
+  }
+}
