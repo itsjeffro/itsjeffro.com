@@ -7,17 +7,20 @@ interface DataRowInterface {
 }
 
 interface Interface {
+  includeCheckbox?: boolean
   columns: DataRowInterface[]
   rows: any[]
 }
 
 const DataGrid = (props: Interface) => {
-  const { columns, rows } = props;
+  const { includeCheckbox, columns, rows } = props;
 
   return (
     <table className="table">
       <thead>
         <tr>
+          {includeCheckbox ? <th><input type="checkbox" name="checkbox" /></th> : ''}
+          
           {columns.map((column: any, index: number) => (
             <th key={ `c:${ index }`}>{ column.headerName }</th>
           ))}
@@ -25,7 +28,7 @@ const DataGrid = (props: Interface) => {
       </thead>
       <tbody>
         {rows.map((row: any, index: number) => (
-          <DataRow key={ `r:${ index }` } rowIndex={ index } row={ row } columns={ columns } />
+          <DataRow includeCheckbox={ includeCheckbox } key={ `r:${ index }` } rowIndex={ index } row={ row } columns={ columns } />
         ))}
       </tbody>
     </table>
