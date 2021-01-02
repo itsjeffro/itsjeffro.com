@@ -29,10 +29,16 @@ class UsersPage extends React.Component<any, any> {
       });
   }
   
-  onPageClick = (event, page: number): void => {
+  private onPageClick = (event, page: number): void => {
     event.preventDefault();
     
     console.log(page);
+  };
+  
+  private onTheadClick = (event: any, field: string) => {
+    event.preventDefault();
+
+    console.log(field);
   };
 
   render() {
@@ -60,6 +66,8 @@ class UsersPage extends React.Component<any, any> {
         
         <div className="content">
           <div className="container">
+            <h2>Users</h2>
+            
             <div className="row">
               <div className="col-lg-3">
                 <div className="list-group">
@@ -70,17 +78,15 @@ class UsersPage extends React.Component<any, any> {
               </div>
   
               <div className="col-lg-9">
-                <div className="card mb-3">
-                  <div className="card-header">
-                    Users
-                  </div>
+                <div className="mb-3">
                   <DataGrid
                     includeCheckbox
                     columns={ columns }
                     rows={ rows }
+                    onTheadClick={ this.onTheadClick }
                   />
                 </div>
-  
+                
                 <Pagination
                   perPage={ users.meta.per_page }
                   currentPage={ users.meta.current_page }
