@@ -79,7 +79,11 @@ class PostsPage extends React.Component<any, any> {
                   <div className="card-header">
                     Posts
                   </div>
-                  <DataGrid columns={ columns } rows={ this.getPostRows(posts) } />
+                  <DataGrid
+                    includeCheckbox
+                    columns={ columns }
+                    rows={ this.getPostRows(posts) }
+                  />
                 </div>
                 
                 <Pagination
