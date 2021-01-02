@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from "react-router-dom";
 import AdminNavbar from "../../components/AdminNavbar/AdminNavbar";
 import DataGrid from "../../../../components/DataGrid/DataGrid";
 import UsersApi from "../../../../services/api/UsersApi";
@@ -48,7 +49,7 @@ class UsersPage extends React.Component<any, any> {
     
       return {
         id: user.id,
-        email: user.email,
+        email: <NavLink to={ `/users/${ user.id }` }>{ user.email }</NavLink>,
         createdAt: <span title={ user.createdAt }>{ dateTime.format('d F, Y - h:i A') }</span>,
       };
     });
@@ -73,7 +74,11 @@ class UsersPage extends React.Component<any, any> {
                   <div className="card-header">
                     Users
                   </div>
-                  <DataGrid columns={ columns } rows={ rows } />
+                  <DataGrid
+                    includeCheckbox
+                    columns={ columns }
+                    rows={ rows }
+                  />
                 </div>
   
                 <Pagination
