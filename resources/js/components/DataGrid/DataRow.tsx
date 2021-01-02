@@ -7,6 +7,7 @@ const DataRow = (props: any) => {
     row,
     columns,
     onCheckboxClick,
+    isChecked,
   } = props;
 
   return (
@@ -17,6 +18,7 @@ const DataRow = (props: any) => {
               type="checkbox"
               name="checkbox"
               onClick={ (event) => typeof onCheckboxClick !== "undefined" ? onCheckboxClick(event, rowIndex) : null }
+              checked={ isChecked }
             />
           </td>
         : <td>{ '' }</td> }

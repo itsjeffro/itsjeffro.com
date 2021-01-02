@@ -32,7 +32,12 @@ const DataGrid = (props: Interface) => {
     <div className="card">
       <div className="card-header">
         { includeCheckbox
-          ? <input type="checkbox" name="checkbox" onClick={ (event) => onCheckboxClick(event, 0, rowCount) } />
+          ? <input
+              type="checkbox"
+              name="checkbox"
+              onClick={ (event) => onCheckboxClick(event, 0, rowCount) }
+              checked={ checkedRows.length > 0 }
+            />
           : '' }
         
         { (checkedRows || []).length > 0
@@ -62,6 +67,7 @@ const DataGrid = (props: Interface) => {
               rowIndex={ index }
               row={ row }
               columns={ columns }
+              isChecked={ checkedRows.includes(index) }
             />
           )) }
         </tbody>
