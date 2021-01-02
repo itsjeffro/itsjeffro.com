@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import AdminNavbar from "../../../../components/AdminNavbar/AdminNavbar";
 import PostsApi from "../../../../../../services/api/PostsApi";
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 
 class AddPostPage extends React.Component<any, any> {
   state = {
@@ -113,7 +112,7 @@ class AddPostPage extends React.Component<any, any> {
                     
                     <label htmlFor="conttent">Content</label>
                     <ReactQuill
-                      theme="snow"
+                      theme={"snow"}
                       value={ post.content }
                       onChange={ this.onTextChange }
                     />
