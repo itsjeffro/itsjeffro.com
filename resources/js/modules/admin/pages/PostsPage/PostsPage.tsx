@@ -69,6 +69,10 @@ class PostsPage extends React.Component<any, any> {
     console.log(field);
   };
   
+  private onActionDeleteClick = () => {
+    console.log('delete selected', this.state.checkedRows);
+  }
+  
   render() {
     const { checkedRows, posts } = this.state;
     
@@ -97,12 +101,18 @@ class PostsPage extends React.Component<any, any> {
               <div className="col-lg-9">
                 <div className="mb-3">
                   <DataGrid
-                    checkedRows={ checkedRows }
                     columns={ columns }
-                    includeCheckbox
                     rows={ this.getPostRows(posts) }
-                    onCheckboxClick={ this.onCheckboxClick }
-                    onTheadClick={ this.onTheadClick }
+                    sortOptions={{
+                      onTheadClick: this.onTheadClick,
+                    }}
+                    checkboxOptions={{
+                      checkedRows: checkedRows,
+                      onCheckboxClick: this.onCheckboxClick,
+                      actions: [
+                        { name: "Delete selected", onClick: this.onActionDeleteClick }
+                      ]
+                    }}
                   />
                 </div>
                 

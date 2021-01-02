@@ -17,7 +17,7 @@ const DataRow = (props: any) => {
             <input
               type="checkbox"
               name="checkbox"
-              onClick={ (event) => typeof onCheckboxClick !== "undefined" ? onCheckboxClick(event, rowIndex) : null }
+              onChange={ (event) => typeof onCheckboxClick !== "undefined" ? onCheckboxClick(event, rowIndex) : null }
               checked={ isChecked }
             />
           </td>
