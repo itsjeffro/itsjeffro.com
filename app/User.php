@@ -3,7 +3,9 @@
 namespace App;
 
 use App\Models\Role;
+use App\Models\UserProfile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -49,6 +51,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $with = [
+        'profile',
         'roles',
     ];
 
@@ -60,5 +63,15 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->hasRole(Role::ADMIN_ROLE);
+    }
+
+    /**
+     * User has one user profile.
+     *
+     * @return HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
     }
 }
