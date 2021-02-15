@@ -80,10 +80,9 @@ class UsersPage extends React.Component<any, any> {
               <div className="col-lg-9">
                 <div className="mb-3">
                   <DataGrid
-                    includeCheckbox
                     columns={ columns }
                     rows={ rows }
-                    onTheadClick={ this.onTheadClick }
+                    sortOptions={{ onTheadClick: this.onTheadClick }}
                   />
                 </div>
                 
