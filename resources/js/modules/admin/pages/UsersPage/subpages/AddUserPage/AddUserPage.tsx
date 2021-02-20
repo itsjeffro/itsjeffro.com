@@ -2,13 +2,17 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import AdminNavbar from "../../../../components/AdminNavbar/AdminNavbar";
 import UsersApi from "../../../../../../services/api/UsersApi";
+import Container from "../../../../../../components/Container";
+import Button from "../../../../../../components/Button";
 
 class AddUserPage extends React.Component<any, any> {
   state = {
+    userId: '',
     user: {
       id: '',
       name: '',
       email: '',
+      password: '',
     },
   };
   
@@ -25,30 +29,47 @@ class AddUserPage extends React.Component<any, any> {
     
     usersApi.getOne(userId)
       .then((response) => {
-        this.setState({ user: response.data.data });
+        const user = response.data.data;
+
+        this.setState((prevState) => {
+          return {
+            userId: user.id,
+            user: {
+              ...prevState.user,
+              name: user.name,
+              email: user.email,
+            }
+          }
+        });
       }, (error) => {
         //
       })
   }
-  
+
+  /**
+   * Handle input change.
+   */
   onInputChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.value;
     
-    const post = {
+    const user = {
       ...this.state.user,
       [name]: value,
     };
     
-    this.setState({ post: post });
+    this.setState({ user: user });
   }
-  
-  onSaveClick = (postId: string) => {
+
+  /**
+   * Save user.
+   */
+  onSaveClick = (userId: string) => {
     const { user } = this.state;
     const usersApi = new UsersApi();
   
-    usersApi.updateOne(postId, user)
+    usersApi.updateOne(userId, user)
       .then((response) => {
         //
       }, (error) => {
@@ -57,23 +78,25 @@ class AddUserPage extends React.Component<any, any> {
   };
   
   render() {
-    const { user } = this.state;
+    const { userId, user } = this.state;
   
     return (
       <>
         <AdminNavbar />
         
         <div className="content">
-          <div className="container">
+          <Container>
             <div className="row">
+
               <div className="col-lg-9">
                 <div className="card mb-3">
                   <div className="card-header">
                     Edit User (<NavLink to="/users">Back to users</NavLink>)
                   </div>
+
                   <div className="card-body">
                     <div className="form-group">
-                      <label htmlFor="name">Name</label>
+                      <label htmlFor="name">Name *</label>
                       <input
                         type="text"
                         className="form-control"
@@ -85,7 +108,7 @@ class AddUserPage extends React.Component<any, any> {
                     </div>
   
                     <div className="form-group">
-                      <label htmlFor="email">Email</label>
+                      <label htmlFor="email">Email *</label>
                       <input
                         type="text"
                         className="form-control"
@@ -95,6 +118,20 @@ class AddUserPage extends React.Component<any, any> {
                         onChange={ (event) => this.onInputChange(event) }
                       />
                     </div>
+
+                    <h6>Change password</h6>
+
+                    <div className="form-group">
+                      <label htmlFor="password">Password</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        name="password"
+                        value={ this.state.user.password }
+                        onChange={ (event) => this.onInputChange(event) }
+                      />
+                  </div>
                   </div>
                 </div>
               </div>
@@ -102,15 +139,17 @@ class AddUserPage extends React.Component<any, any> {
               <div className="col-lg-3">
                 <ul className="list-group">
                   <li className="list-group-item">
-                    <button
-                      className="btn btn-primary btn-block"
-                      onClick={ (event) => this.onSaveClick(user.id) }
-                    >Save</button>
+                    <Button
+                      variant="primary"
+                      onClick={ () => this.onSaveClick(userId) }
+                      isFluid
+                    >Save</Button>
                   </li>
                 </ul>
               </div>
+
             </div>
-          </div>
+          </Container>
         </div>
       </>
     );
