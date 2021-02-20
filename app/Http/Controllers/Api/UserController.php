@@ -7,6 +7,8 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController
 {
@@ -31,6 +33,11 @@ class UserController
      */
     public function store(Request $request): UserResource
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
         $user = new User();
         $user->email = $request->input('email');
         $user->name = $request->input('name');
@@ -50,7 +57,18 @@ class UserController
      */
     public function update(Request $request, User $user): UserResource
     {
-        $user->fill($request->all());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        if ($request->has('password') && !empty($request->input('password'))) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
         $user->save();
 
         if ($request->has('roles')) {
