@@ -1,4 +1,4 @@
-version: '2'
+version: '3.7'
 services:
   itsjeffrocom_web:
     image: itsjeff/dev-php:latest
@@ -6,16 +6,17 @@ services:
     volumes:
       - .:/var/www/html
       - ./environment/nginx/default:/etc/nginx/sites-enabled/default
-    environment:
-      - VIRTUAL_HOST=local.itsjeffro.com
-      - VIRTUAL_PORT=80
     env_file:
-    - .docker.env
-    extra_hosts:
-      - "local.itsjeffro.com.:127.0.0.1"
-    network_mode: "bridge"
+      - .docker.env
     links:
       - itsjeffrocom_db
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.itsjeffrocom_web.rule=Host(`local.itsjeffro.com`)
+    networks:
+      - itsjeffro-network
+      - traefik-network
+
   itsjeffrocom_db:
     image: mysql:5.7
     container_name: itsjeffrocom_db
@@ -24,7 +25,16 @@ services:
       - ./environment/mysql:/var/lib/mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: changeme
     ports:
       - "3306"
-    network_mode: "bridge"
+    networks:
+      - itsjeffro-network
+
+networks:
+  itsjeffro-network:
+    name: itsjeffro-network
+    driver: bridge
+  traefik-network:
+    external:
+      name: traefik-network
