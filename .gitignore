@@ -6,11 +6,12 @@
 /public/css/*
 /storage/*.key
 /vendor
-/environment
+/environment/mysql
 .env
 .env.backup
 .phpunit.result.cache
 .docker.env
+.docker-compose.yml
 Homestead.json
 Homestead.yaml
 npm-debug.log
