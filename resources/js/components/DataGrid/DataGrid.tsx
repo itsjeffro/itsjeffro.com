@@ -35,6 +35,10 @@ const DataGrid = (props: Interface) => {
   
   const rowCount = rows.length;
 
+  // Checkbox
+  const checkedRows = checkboxOptions ? checkboxOptions.checkedRows : [];
+  const checkboxActions = checkboxOptions ? checkboxOptions.actions : [];
+
   return (
     <div className="card">
       <div className="card-header">
@@ -43,18 +47,18 @@ const DataGrid = (props: Interface) => {
               type="checkbox"
               name="checkbox"
               onChange={ (event) => checkboxOptions.onCheckboxClick(event, 0, rowCount) }
-              checked={ (checkboxOptions.checkedRows || []).length > 0 }
+              checked={ checkedRows.length > 0 }
             />
-          : '' }
+          : <></> }
         
-        { (checkboxOptions.checkedRows || []).length > 0
-          ? <Options actions={ checkboxOptions.actions } />
-          : '' }
+        { checkedRows.length > 0
+          ? <Options actions={ checkboxActions } />
+          : <></> }
       </div>
       <table className="table">
         <thead>
           <tr>
-            { typeof checkboxOptions !== "undefined" ? <th>{ '' }</th> : '' }
+            { typeof checkboxOptions !== "undefined" ? <th>{ '' }</th> : <></> }
             
             {columns.map((column: any, index: number) => (
               <TheadColumn
@@ -68,19 +72,18 @@ const DataGrid = (props: Interface) => {
         <tbody>
           { rows.map((row: any, index: number) => (
             <DataRow
-              includeCheckbox={ typeof checkboxOptions !== "undefined" }
-              onCheckboxClick={ checkboxOptions.onCheckboxClick }
+              checkboxOptions={ checkboxOptions }
               key={ `r:${ index }` }
               rowIndex={ index }
               row={ row }
               columns={ columns }
-              isChecked={ (checkboxOptions.checkedRows || []).includes(index) }
+              isChecked={ checkedRows.includes(index) }
             />
           )) }
         </tbody>
       </table>
     </div>
   );
-};
+}
 
 export default DataGrid;
